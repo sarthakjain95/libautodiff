@@ -10,17 +10,20 @@ int main(){
     scalar x{-4};
     scalar y{2};
 
-    auto z = x * y;
-
-    // auto z{(x * y + autodiff::pow(x, 2) * y) * y};
-    // auto z{(x * y + (x * x) * y)};
+    // auto z{y + (autodiff::pow(x, 2) * y)};
+    auto z{(x * y * autodiff::pow(x, 2) * y) * y};
     // auto z{(x * y + x * (x * y))};
 
-    // z.backward();
+    z.backward(true);
 
-    cout << x << endl;
-    cout << y << endl;
-    cout << z << endl;
+    cout << endl;
+    for(const autodiff::node& n : autodiff::nodes){
+        cout << ((uint64_t)n) << ' ' << *n << endl;
+    }   cout << endl;
+
+    cout << ((uint64_t)&x) << " " << x << endl;
+    cout << ((uint64_t)&y) << " " << y << endl;
+    cout << ((uint64_t)&z) << " " << z << endl;
 
     return 0;
 }
