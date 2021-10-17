@@ -18,8 +18,7 @@ std::vector<node> nodes;
 std::string default_code{"a"};
 int rounds{};
 
-template<typename foo>
-std::function<void(foo)> DO_NOTHING = [](foo bar){ return; };
+std::function<void(node)> DO_NOTHING = [](node _){ return; };
 
 class scalar{
 public:
@@ -27,7 +26,7 @@ public:
     const double val;
     double grad = 0;
     std::pair<node, node> parents;
-    std::function<void(node)> compute_grad = DO_NOTHING<node>;
+    std::function<void(node)> compute_grad = DO_NOTHING;
     std::string eq;
     std::string label;
     /* Constructors */
